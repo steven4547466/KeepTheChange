@@ -11,8 +11,8 @@ namespace KeepTheChange.Handlers
     public class Player
     {
         System.Random rnd = new System.Random();
-        Dictionary<byte, List<byte>> openedLockers = new Dictionary<byte, List<byte>>();
-        int lockersOpened = 0;
+        public Dictionary<byte, List<byte>> openedLockers = new Dictionary<byte, List<byte>>();
+        public int lockersOpened = 0;
         public void OnInteractingLocker(InteractingLockerEventArgs ev)
         {
             if (!KeepTheChange.Instance.Config.SpawnCoins) return;

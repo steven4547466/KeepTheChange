@@ -15,6 +15,8 @@ namespace KeepTheChange.Handlers
         public void OnRoundStarted()
         {
             if (!KeepTheChange.Instance.Config.SpawnCoins) return;
+            KeepTheChange.Instance.player.openedLockers = new Dictionary<byte, List<byte>>();
+            KeepTheChange.Instance.player.lockersOpened = 0;
             numCoins = rnd.Next(KeepTheChange.Instance.Config.MinCoins, KeepTheChange.Instance.Config.MaxCoins);
             spawnedCoins = 0;
             List<Room> rooms = Map.Rooms.Where(r => r.Zone == ZoneType.LightContainment).ToList();
