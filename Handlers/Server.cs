@@ -14,7 +14,7 @@ namespace KeepTheChange.Handlers
         System.Random rnd = new System.Random();
         public void OnRoundStarted()
         {
-            if (!KeepTheChange.Instance.Config.SpawnCoins) return;
+            if (!KeepTheChange.Instance.Config.SpawnCoins || KeepTheChange.Instance.player == null) return;
             KeepTheChange.Instance.player.openedLockers = new Dictionary<byte, List<byte>>();
             KeepTheChange.Instance.player.lockersOpened = 0;
             numCoins = rnd.Next(KeepTheChange.Instance.Config.MinCoins, KeepTheChange.Instance.Config.MaxCoins);
@@ -29,6 +29,11 @@ namespace KeepTheChange.Handlers
                 {
                     maxX = 2;
                     maxZ = 2;
+                }
+                if(room.Position == null)
+                {
+                    i--;
+                    continue;
                 }
                 Vector3 pos = room.Position + new Vector3((float)rnd.Next(-maxX, maxX), 3, (float)rnd.Next(-maxZ, maxZ));
                 Exiled.API.Extensions.Item.Spawn(ItemType.Coin, 1f, pos, Quaternion.Euler(90, rnd.Next(361), rnd.Next(361)));
